@@ -54,11 +54,12 @@ namespace EmailAuthorization.Models {
 
             using var connection = new MySqlConnection("server=localhost;database=przychodnia9;user=root;password=12345");
 			connection.Open();
-			using var cmd = new MySqlCommand($"start transaction; update user set activated = 1,firstLogin=0, hash ='{hash}' where token='{token}'; commit; ", connection);
+			using var cmd = new MySqlCommand($"update user set activated = 1,firstLogin=0, hash ='{hash}' where token='{token}'", connection);
 			cmd.ExecuteNonQuery();
+            Console.WriteLine("wykonano");
 
 
-		}
+        }
 	
 
 		public User getUserByToken(string token) {
